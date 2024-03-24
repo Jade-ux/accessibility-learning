@@ -5,9 +5,6 @@ import Form from "./Form";
 import FilterButton from "../FilterButton";
 import PlacesToGo from "./PlacesToGo";
 
-// go through tut and pull out the accessibility features
-// create the non-accessible version
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function usePrevious(value: any) {
   const ref = useRef(null);

@@ -1,6 +1,18 @@
 import { SetStateAction, useState } from "react";
 import { FormEvent } from "./NAForm";
 
+// CURRENT
+// we want to know when the user is editing a place, so we can focus the input field
+// and then we want to know when they are done editing, so we can focus the Edit button
+
+// PREVIOUS
+// to store what not only the current value but also the previous value, we need to do something like this:
+// if (wasNotEditingBefore && isEditingNow) {
+//   focusOnEditField();
+// } else if (wasEditingBefore && isNotEditingNow) {
+//   focusOnEditButton();
+// }
+
 interface NAPlacesToGoProps {
   id: string;
   name: string;

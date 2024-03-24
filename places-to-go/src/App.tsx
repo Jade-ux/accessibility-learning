@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <div>
-        {/* <Accessible places={INITIAL_DATA} /> */}
-        <NotAccessible places={INITIAL_DATA} />
+        <Accessible places={INITIAL_DATA} />
+        {/* <NotAccessible places={INITIAL_DATA} /> */}
       </div>
     </>
   );
