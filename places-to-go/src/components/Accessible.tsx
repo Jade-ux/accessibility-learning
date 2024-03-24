@@ -1,8 +1,9 @@
 import React from "react";
-import Form from "./Form";
 import { nanoid } from "nanoid";
 
 import { useEffect, useRef, useState } from "react";
+import Form from "./Form";
+import FilterButton from "./FilterButton";
 
 function usePrevious(value) {
   const ref = useRef(null);
@@ -31,7 +32,7 @@ interface AccessibleProps {
 
 export function Accessible(props: AccessibleProps) {
   const [places, setPlaces] = useState(props.places);
-  // const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("All");
 
   const placeList = places
     ?.filter(FILTER_MAP[filter])
@@ -46,6 +47,15 @@ export function Accessible(props: AccessibleProps) {
         editPlace={editPlace}
       />
     ));
+
+  const filterList = FILTER_NAMES.map((name) => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
+    />
+  ));
 
   function addPlace(name: string) {
     const newPlace = {
@@ -64,6 +74,7 @@ export function Accessible(props: AccessibleProps) {
         heading and a paragraph.
       </p>
       <Form addPlace={addPlace} />
+      <div className="filters btn-group stack-exception">{filterList}</div>
     </div>
   );
 }
