@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Accessible from "./components/Accessible";
 import "./App.css";
 

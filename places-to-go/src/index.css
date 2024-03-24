@@ -72,6 +72,71 @@ li {
 
 }
 
+/* Buttons */
+
+.btn {
+  align-items: center;
+    justify-content: center;
+    padding: 0.5em 1em;
+    border-radius: 3rem;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    /* background-color: #370e51; */
+    cursor: pointer;
+    /* color: #ffffff; */
+    margin: 0.5em;
+}
+
+.toggle-btn {
+  background-color: #1C352D;
+  color: #ffffff;
+}
+
+.place-cancel-btn {
+  background-color: #778899;
+  color: #ffffff;
+}
+
+.place-edit-btn {
+  background-color: #2e916d;
+  color: #ffffff;
+}
+
+.place-delete-btn {
+  background-color: #963700;
+  color: #ffffff;
+}
+
+.place-save-btn {
+  background-color: #8DB600;
+  color: #ffffff;
+}
+
+.place-add-btn {
+  background-color: #3EB489;
+  color: #ffffff;
+}
+
+.toggle-btn:hover {
+  background-color: #a264ff;
+}
+
+/* form */
+
+.form-group {
+  margin-bottom: 1em;
+
+}
+
+.places-label {
+  font-size: 1.2em;
+  font-weight: 500;
+
+  margin-bottom: 0.5em;
+  margin-right: 1em;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

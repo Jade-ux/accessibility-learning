@@ -56,15 +56,15 @@ function PlacesToGo(props: PlacesToGoProps) {
       <div className="btn-group">
         <button
           type="button"
-          className="btn place-cancel"
+          className="btn place-cancel-btn"
           onClick={() => setEditing(false)}
         >
           Cancel
-          <span className="visually-hidden">renaming {props.name}</span>
+          <span className="visually-hidden"> renaming {props.name}</span>
         </button>
-        <button type="submit" className="btn btn__primary place-edit">
+        <button type="submit" className="btn place-edit-btn">
           Save
-          <span className="visually-hidden">new name for {props.name}</span>
+          <span className="visually-hidden"> new name for {props.name} </span>
         </button>
       </div>
     </form>
@@ -86,7 +86,7 @@ function PlacesToGo(props: PlacesToGoProps) {
       <div className="btn-group">
         <button
           type="button"
-          className="btn"
+          className="btn place-edit-btn"
           onClick={() => {
             setEditing(true);
           }}
@@ -96,7 +96,7 @@ function PlacesToGo(props: PlacesToGoProps) {
         </button>
         <button
           type="button"
-          className="btn btn__danger"
+          className="btn place-delete-btn"
           onClick={() => props.deletePlace(props.id)}
         >
           Delete <span className="visually-hidden">{props.name}</span>

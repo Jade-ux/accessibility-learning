@@ -40,7 +40,7 @@ function Form(props: FormProps) {
         value={name}
         onChange={handleChange}
       />
-      <button type="submit" className="btn btn__primary btn__lg">
+      <button type="submit" className="btn place-add-btn">
         Add
       </button>
     </form>

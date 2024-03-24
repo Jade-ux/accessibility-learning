@@ -94,8 +94,8 @@ export function Accessible(props: AccessibleProps) {
     setPlaces([...places, newPlace]);
   }
 
-  const headingNoun = `${placeList?.length > 1 ? "places" : "place"} to visit`;
-  const headingText = `${placeList.length} ${headingNoun} remaining`;
+  const headingNoun = `${placeList?.length > 1 ? "places" : "place"}`;
+  const headingText = `${placeList.length} ${headingNoun}`;
 
   const listHeadingRef = useRef<HTMLHeadingElement>(null);
   const prevPlaceLength = usePrevious(placeList?.length);
@@ -112,7 +112,7 @@ export function Accessible(props: AccessibleProps) {
       <p>Add steps to walk through, to show accessibility</p>
       <Form addPlace={addPlace} />
       <div className="filters btn-group stack-exception">{filterList}</div>
-      <h2 id="list-heading" tabIndex="-1">
+      <h2 id="list-heading" tabIndex={-1}>
         {headingText}
       </h2>
       <ul
