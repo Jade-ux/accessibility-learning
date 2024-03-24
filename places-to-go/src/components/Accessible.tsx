@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { useEffect, useRef, useState } from "react";
 import Form from "./Form";
 import FilterButton from "./FilterButton";
+import PlacesToGo from "./PlacesToGo";
 
 function usePrevious(value) {
   const ref = useRef(null);
@@ -91,8 +92,8 @@ export function Accessible(props: AccessibleProps) {
     setPlaces([...places, newPlace]);
   }
 
-  // TODO: add in number of places left to visit
-  const headingText = `${placeList?.length > 1 ? "places" : "place"} to visit`;
+  const headingNoun = `${placeList?.length > 1 ? "places" : "place"} to visit`;
+  const headingText = `${placeList.length} ${headingNoun} remaining`;
 
   return (
     <div>
