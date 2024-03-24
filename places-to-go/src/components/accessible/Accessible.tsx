@@ -5,9 +5,9 @@ import Form from "./Form";
 import FilterButton from "../FilterButton";
 import PlacesToGo from "./PlacesToGo";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function usePrevious(value: any) {
-  const ref = useRef(null);
+// we want to know when a user has finished editing a place, so we can focus the Edit button
+function usePrevious(value: number | null) {
+  const ref = useRef<number | null>(null);
   useEffect(() => {
     ref.current = value;
   });
@@ -96,6 +96,8 @@ export function Accessible(props: AccessibleProps) {
   const headingNoun = `${placeList?.length === 1 ? "place" : "places"}`;
   const headingText = `${placeList.length} ${headingNoun}`;
 
+  // we want to focus the heading when the list changes
+  // but  only when we have fewer places than before
   const listHeadingRef = useRef<HTMLHeadingElement>(null);
   const prevPlaceLength = usePrevious(placeList?.length);
 
@@ -103,6 +105,7 @@ export function Accessible(props: AccessibleProps) {
     if (prevPlaceLength && placeList?.length < prevPlaceLength) {
       listHeadingRef.current?.focus();
     }
+    // only re-run when the number of places changes
   }, [placeList?.length, prevPlaceLength]);
 
   return (
@@ -111,6 +114,7 @@ export function Accessible(props: AccessibleProps) {
       <p>Add steps to walk through, to show accessibility</p>
       <Form addPlace={addPlace} />
       <div className="filters btn-group stack-exception">{filterList}</div>
+      {/* make the heading focusable - headings aren't usually focusable but we can make them focusable by adding a tabIndex of -1 */}
       <h2 id="list-heading" tabIndex={-1}>
         {headingText}
       </h2>

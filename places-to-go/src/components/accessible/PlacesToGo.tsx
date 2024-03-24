@@ -1,12 +1,8 @@
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { FormEvent } from "./Form";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function usePrevious(value: any) {
-  // custom hook created to store the previous value of a state variable
-  // because we want to know when the value of isEditing changes from false to true, and vice versa
-  // ref: https://legacy.reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state
-  const ref = useRef(null);
+function usePrevious(value: boolean | null) {
+  const ref = useRef<boolean | null>(null);
   useEffect(() => {
     ref.current = value;
   });
@@ -24,8 +20,11 @@ interface PlacesToGoProps {
 
 function PlacesToGo(props: PlacesToGoProps) {
   const [isEditing, setEditing] = useState(false);
+  console.log("isEditing: ", isEditing);
+
   const [newName, setNewName] = useState("");
 
+  /* useState instead
   // we want to know when the user is editing a place, so we can focus the input field
   // and then we want to know when they are done editing, so we can focus the Edit button again
   // to store not only the current value but also the previous value, we need to do something like this:
@@ -37,9 +36,10 @@ function PlacesToGo(props: PlacesToGoProps) {
   //   setWasEditing(false);
   // } else if (wasEditing && !isEditing) {
   //   setWasEditing(true);
-  // }
+  // } */
 
   const wasEditing = usePrevious(isEditing);
+  console.log("wasEditing: ", wasEditing);
 
   // useRef() creates an object with a single property current. This object persists for the full lifetime of the component.
   // starts with null - will be empty until they're attached to a DOM element

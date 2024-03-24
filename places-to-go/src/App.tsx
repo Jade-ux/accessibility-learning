@@ -1,6 +1,6 @@
 import Accessible from "./components/accessible/Accessible";
 import "./App.css";
-import NotAccessible from "./components/nonaccessible/NotAccessible";
+// import NotAccessible from "./components/nonaccessible/NotAccessible";
 
 function App() {
   const INITIAL_DATA = [
