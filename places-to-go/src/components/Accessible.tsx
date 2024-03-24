@@ -17,18 +17,20 @@ function usePrevious(value) {
 // change completed to visited
 const FILTER_MAP = {
   All: () => true,
-  Active: (place) => !place.completed,
-  Completed: (place) => place.completed,
+  Active: (place: Place) => !place.completed,
+  Completed: (place: Place) => place.completed,
 };
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
+export interface Place {
+  id: string;
+  name: string;
+  completed: boolean;
+}
+
 interface AccessibleProps {
-  places: {
-    id: string;
-    name: string;
-    completed: boolean;
-  }[];
+  places: Place[];
 }
 
 export function Accessible(props: AccessibleProps) {
@@ -95,13 +97,19 @@ export function Accessible(props: AccessibleProps) {
   const headingNoun = `${placeList?.length > 1 ? "places" : "place"} to visit`;
   const headingText = `${placeList.length} ${headingNoun} remaining`;
 
+  const listHeadingRef = useRef<HTMLHeadingElement>(null);
+  const prevPlaceLength = usePrevious(placeList?.length);
+
+  useEffect(() => {
+    if (prevPlaceLength && placeList?.length < prevPlaceLength) {
+      listHeadingRef.current?.focus();
+    }
+  }, [placeList?.length, prevPlaceLength]);
+
   return (
     <div>
       <h2>Accessible</h2>
-      <p>
-        This component is accessible. It is a simple component that renders a
-        heading and a paragraph.
-      </p>
+      <p>Add steps to walk through, to show accessibility</p>
       <Form addPlace={addPlace} />
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading" tabIndex="-1">
@@ -109,7 +117,7 @@ export function Accessible(props: AccessibleProps) {
       </h2>
       <ul
         aria-labelledby="list-heading"
-        className="todo-list stack-large stack-exception"
+        className="places-list stack-large stack-exception"
         role="list"
       >
         {placeList}

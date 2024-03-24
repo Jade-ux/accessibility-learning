@@ -9,7 +9,7 @@ function usePrevious(value) {
   return ref.current;
 }
 
-function Todo(props) {
+function PlacesToGo(props) {
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState("");
 
@@ -33,12 +33,12 @@ function Todo(props) {
   const editingTemplate = (
     <form className="stack-small" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label className="todo-label" htmlFor={props.id}>
+        <label className="places-label" htmlFor={props.id}>
           New name for {props.name}
         </label>
         <input
           id={props.id}
-          className="todo-text"
+          className="input-text"
           type="text"
           value={newName}
           onChange={handleChange}
@@ -48,13 +48,13 @@ function Todo(props) {
       <div className="btn-group">
         <button
           type="button"
-          className="btn todo-cancel"
+          className="btn place-cancel"
           onClick={() => setEditing(false)}
         >
           Cancel
           <span className="visually-hidden">renaming {props.name}</span>
         </button>
-        <button type="submit" className="btn btn__primary todo-edit">
+        <button type="submit" className="btn btn__primary place-edit">
           Save
           <span className="visually-hidden">new name for {props.name}</span>
         </button>
@@ -71,7 +71,7 @@ function Todo(props) {
           defaultChecked={props.completed}
           onChange={() => props.toggleplaceCompleted(props.id)}
         />
-        <label className="todo-label" htmlFor={props.id}>
+        <label className="place-label" htmlFor={props.id}>
           {props.name}
         </label>
       </div>
@@ -105,7 +105,9 @@ function Todo(props) {
     }
   }, [wasEditing, isEditing]);
 
-  return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
+  return (
+    <li className="place">{isEditing ? editingTemplate : viewTemplate}</li>
+  );
 }
 
-export default Todo;
+export default PlacesToGo;
