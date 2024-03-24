@@ -1,12 +1,15 @@
-import React from "react";
 import { nanoid } from "nanoid";
 
 import { useEffect, useRef, useState } from "react";
 import Form from "./Form";
-import FilterButton from "./FilterButton";
+import FilterButton from "../FilterButton";
 import PlacesToGo from "./PlacesToGo";
 
-function usePrevious(value) {
+// go through tut and pull out the accessibility features
+// create the non-accessible version
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function usePrevious(value: any) {
   const ref = useRef(null);
   useEffect(() => {
     ref.current = value;
@@ -62,7 +65,7 @@ export function Accessible(props: AccessibleProps) {
   }
 
   const placeList = places
-    ?.filter(FILTER_MAP[filter])
+    ?.filter(FILTER_MAP[filter as keyof typeof FILTER_MAP])
     .map((place) => (
       <PlacesToGo
         id={place.id}

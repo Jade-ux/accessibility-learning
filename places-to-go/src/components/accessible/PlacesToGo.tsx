@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
+import { FormEvent } from "./Form";
 
-function usePrevious(value) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function usePrevious(value: any) {
   const ref = useRef(null);
   useEffect(() => {
     ref.current = value;
@@ -21,17 +23,22 @@ function PlacesToGo(props: PlacesToGoProps) {
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState("");
 
-  const editFieldRef = useRef(null);
-  const editButtonRef = useRef(null);
+  // useRef() creates an object with a single property current. This object persists for the full lifetime of the component.
+
+  const editFieldRef = useRef<HTMLInputElement>(null);
+  const editButtonRef = useRef<HTMLButtonElement>(null);
+
+  // eg. useRef(null) is equivalent to creating an object { current: null }. - it can store any value, even elements - which is what we'll do
+  console.log("editFieldRef: ", editFieldRef);
+  console.log("editButtonRef: ", editButtonRef);
 
   const wasEditing = usePrevious(isEditing);
 
-  function handleChange(event) {
+  function handleChange(event: { target: { value: SetStateAction<string> } }) {
     setNewName(event.target.value);
   }
 
-  // fix for being able to submit blank form
-  function handleSubmit(event) {
+  function handleSubmit(event: FormEvent) {
     event.preventDefault();
     props.editPlace(props.id, newName);
     setNewName("");
@@ -56,13 +63,13 @@ function PlacesToGo(props: PlacesToGoProps) {
       <div className="btn-group">
         <button
           type="button"
-          className="btn place-cancel-btn"
+          className="btn place-btn place-cancel-btn"
           onClick={() => setEditing(false)}
         >
           Cancel
           <span className="visually-hidden"> renaming {props.name}</span>
         </button>
-        <button type="submit" className="btn place-edit-btn">
+        <button type="submit" className="btn place-btn place-edit-btn">
           Save
           <span className="visually-hidden"> new name for {props.name} </span>
         </button>
@@ -86,7 +93,7 @@ function PlacesToGo(props: PlacesToGoProps) {
       <div className="btn-group">
         <button
           type="button"
-          className="btn place-edit-btn"
+          className="btn place-btn place-edit-btn"
           onClick={() => {
             setEditing(true);
           }}
@@ -96,7 +103,7 @@ function PlacesToGo(props: PlacesToGoProps) {
         </button>
         <button
           type="button"
-          className="btn place-delete-btn"
+          className="btn place-btn place-delete-btn"
           onClick={() => props.deletePlace(props.id)}
         >
           Delete <span className="visually-hidden">{props.name}</span>
@@ -107,9 +114,15 @@ function PlacesToGo(props: PlacesToGoProps) {
 
   useEffect(() => {
     if (!wasEditing && isEditing) {
-      editFieldRef.current.focus();
+      if (editFieldRef.current !== null) {
+        console.log("editFieldRef.current: ", editFieldRef.current);
+        editFieldRef.current.focus();
+      }
     } else if (wasEditing && !isEditing) {
-      editButtonRef.current.focus();
+      if (editButtonRef.current !== null) {
+        console.log("editButtonRef.current: ", editButtonRef.current);
+        editButtonRef.current.focus();
+      }
     }
   }, [wasEditing, isEditing]);
 

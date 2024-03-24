@@ -1,8 +1,7 @@
-// Places to visit
-// filters: visited, not visited, all
-
 import React from "react";
 import { useState } from "react";
+
+export type FormEvent = React.FormEvent<HTMLFormElement>;
 
 type FormProps = {
   addPlace: (name: string) => void;
@@ -13,13 +12,15 @@ function Form(props: FormProps) {
   const [name, setName] = useState<string>("");
 
   // fix for being able to submit blank form
-  function handleSubmit(event) {
+  function handleSubmit(event: FormEvent) {
     event.preventDefault();
     addPlace(name);
     setName("");
   }
 
-  function handleChange(event) {
+  function handleChange(event: {
+    target: { value: React.SetStateAction<string> };
+  }) {
     setName(event.target.value);
   }
 
