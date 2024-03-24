@@ -34,6 +34,21 @@ export function Accessible(props: AccessibleProps) {
   const [places, setPlaces] = useState(props.places);
   const [filter, setFilter] = useState("All");
 
+  function editPlace(id: string, newName: string) {
+    const editedPlaceList = places.map((place) => {
+      if (id === place.id) {
+        return { ...place, name: newName };
+      }
+      return place;
+    });
+    setPlaces(editedPlaceList);
+  }
+
+  function deletePlace(id: string) {
+    const remainingPlaces = places.filter((place) => id !== place.id);
+    setPlaces(remainingPlaces);
+  }
+
   const placeList = places
     ?.filter(FILTER_MAP[filter])
     .map((place) => (
