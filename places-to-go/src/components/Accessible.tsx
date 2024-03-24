@@ -34,6 +34,16 @@ export function Accessible(props: AccessibleProps) {
   const [places, setPlaces] = useState(props.places);
   const [filter, setFilter] = useState("All");
 
+  function togglePlaceCompleted(id: string) {
+    const updatedPlaces = places.map((place) => {
+      if (id === place.id) {
+        return { ...place, completed: !place.completed };
+      }
+      return place;
+    });
+    setPlaces(updatedPlaces);
+  }
+
   function editPlace(id: string, newName: string) {
     const editedPlaceList = places.map((place) => {
       if (id === place.id) {
@@ -81,6 +91,9 @@ export function Accessible(props: AccessibleProps) {
     setPlaces([...places, newPlace]);
   }
 
+  // TODO: add in number of places left to visit
+  const headingText = `${placeList?.length > 1 ? "places" : "place"} to visit`;
+
   return (
     <div>
       <h2>Accessible</h2>
@@ -90,6 +103,16 @@ export function Accessible(props: AccessibleProps) {
       </p>
       <Form addPlace={addPlace} />
       <div className="filters btn-group stack-exception">{filterList}</div>
+      <h2 id="list-heading" tabIndex="-1">
+        {headingText}
+      </h2>
+      <ul
+        aria-labelledby="list-heading"
+        className="todo-list stack-large stack-exception"
+        role="list"
+      >
+        {placeList}
+      </ul>
     </div>
   );
 }
