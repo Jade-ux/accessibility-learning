@@ -14,11 +14,10 @@ function usePrevious(value) {
   return ref.current;
 }
 
-// change completed to visited
 const FILTER_MAP = {
-  All: () => true,
-  Active: (place: Place) => !place.completed,
-  Completed: (place: Place) => place.completed,
+  all: () => true,
+  wishlist: (place: Place) => !place.completed,
+  visited: (place: Place) => place.completed,
 };
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
@@ -35,7 +34,7 @@ interface AccessibleProps {
 
 export function Accessible(props: AccessibleProps) {
   const [places, setPlaces] = useState(props.places);
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("all");
 
   function togglePlaceCompleted(id: string) {
     const updatedPlaces = places.map((place) => {
@@ -94,7 +93,7 @@ export function Accessible(props: AccessibleProps) {
     setPlaces([...places, newPlace]);
   }
 
-  const headingNoun = `${placeList?.length > 1 ? "places" : "place"}`;
+  const headingNoun = `${placeList?.length === 1 ? "place" : "places"}`;
   const headingText = `${placeList.length} ${headingNoun}`;
 
   const listHeadingRef = useRef<HTMLHeadingElement>(null);
