@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useRef, useState } from "react";
 
 function usePrevious(value) {
@@ -9,7 +8,16 @@ function usePrevious(value) {
   return ref.current;
 }
 
-function PlacesToGo(props) {
+interface PlacesToGoProps {
+  id: string;
+  name: string;
+  completed: boolean;
+  editPlace: (id: string, newName: string) => void;
+  deletePlace: (id: string) => void;
+  togglePlaceCompleted: (id: string) => void;
+}
+
+function PlacesToGo(props: PlacesToGoProps) {
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState("");
 
@@ -25,7 +33,7 @@ function PlacesToGo(props) {
   // fix for being able to submit blank form
   function handleSubmit(event) {
     event.preventDefault();
-    props.editplace(props.id, newName);
+    props.editPlace(props.id, newName);
     setNewName("");
     setEditing(false);
   }
@@ -69,7 +77,7 @@ function PlacesToGo(props) {
           id={props.id}
           type="checkbox"
           defaultChecked={props.completed}
-          onChange={() => props.toggleplaceCompleted(props.id)}
+          onChange={() => props.togglePlaceCompleted(props.id)}
         />
         <label className="place-label" htmlFor={props.id}>
           {props.name}
@@ -89,7 +97,7 @@ function PlacesToGo(props) {
         <button
           type="button"
           className="btn btn__danger"
-          onClick={() => props.deleteplace(props.id)}
+          onClick={() => props.deletePlace(props.id)}
         >
           Delete <span className="visually-hidden">{props.name}</span>
         </button>

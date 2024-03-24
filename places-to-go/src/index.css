@@ -53,6 +53,24 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start
+}
+li {
+  margin-bottom: 0.5em;
+  list-style-type: none;
+}
+.c-cb {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: #5d0da0;
+  margin-right: 0.5em;
+  margin-bottom: 1rem;
+
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -65,4 +83,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.placeapp {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 2em;
+}
+
+.place {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.place > * {
+  flex: 0 0 100%;
 }

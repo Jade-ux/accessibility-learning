@@ -107,7 +107,7 @@ export function Accessible(props: AccessibleProps) {
   }, [placeList?.length, prevPlaceLength]);
 
   return (
-    <div>
+    <div className="placeapp">
       <h2>Accessible</h2>
       <p>Add steps to walk through, to show accessibility</p>
       <Form addPlace={addPlace} />
