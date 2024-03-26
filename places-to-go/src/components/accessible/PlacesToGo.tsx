@@ -1,11 +1,19 @@
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { FormEvent } from "./Form";
 
+// 4
+// used to store and return the previous value
+// compare previous value of a prop with it's current value
 function usePrevious(value: boolean | null) {
+  // this will be used to store the previous value
   const ref = useRef<boolean | null>(null);
+  // will run after every render
+  // since it runs after every render, ref here will always be the value from the previous render
+  // it's one step behind
   useEffect(() => {
     ref.current = value;
   });
+  // previous value
   return ref.current;
 }
 
@@ -19,6 +27,7 @@ interface PlacesToGoProps {
 }
 
 function PlacesToGo(props: PlacesToGoProps) {
+  // 2
   const [isEditing, setEditing] = useState(false);
   console.log("isEditing: ", isEditing);
 
@@ -38,6 +47,7 @@ function PlacesToGo(props: PlacesToGoProps) {
   //   setWasEditing(true);
   // } */
 
+  // 5
   const wasEditing = usePrevious(isEditing);
   console.log("wasEditing: ", wasEditing);
 
@@ -45,6 +55,7 @@ function PlacesToGo(props: PlacesToGoProps) {
   // starts with null - will be empty until they're attached to a DOM element
   // and only after React has rendered the component
 
+  // 1
   const editFieldRef = useRef<HTMLInputElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -63,6 +74,7 @@ function PlacesToGo(props: PlacesToGoProps) {
     setEditing(false);
   }
 
+  // 3
   // because this will run as soon as the component is rendered, and isEditing will be false, we don't want to focus the input field if the user hasn't clicked the Edit button yet
   // so we need to check if the user has clicked the Edit button before we focus the input field
   // this is where the wasEditing variable comes in - it will store the previous value of isEditing - using the usePrevious custom hook

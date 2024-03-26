@@ -11,6 +11,14 @@ function Form(props: FormProps) {
   const { addPlace } = props;
   const [name, setName] = useState<string>("");
 
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current !== null) {
+      inputRef.current.focus();
+    }
+  });
+
   // fix for being able to submit blank form
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -40,6 +48,7 @@ function Form(props: FormProps) {
         autoComplete="off"
         value={name}
         onChange={handleChange}
+        ref={inputRef}
       />
       <button type="submit" className="btn place-add-btn">
         Add

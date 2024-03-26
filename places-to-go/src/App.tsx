@@ -1,6 +1,6 @@
-import Accessible from "./components/accessible/Accessible";
+// import Accessible from "./components/accessible/Accessible";
 import "./App.css";
-// import NotAccessible from "./components/nonaccessible/NotAccessible";
+import NotAccessible from "./components/nonaccessible/NotAccessible";
 
 function App() {
   const INITIAL_DATA = [
@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <div>
-        <Accessible places={INITIAL_DATA} />
-        {/* <NotAccessible places={INITIAL_DATA} /> */}
+        {/* <Accessible places={INITIAL_DATA} /> */}
+        <NotAccessible places={INITIAL_DATA} />
       </div>
     </>
   );
